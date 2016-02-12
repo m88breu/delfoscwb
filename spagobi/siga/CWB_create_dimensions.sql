@@ -18,8 +18,8 @@
 --
 DROP TABLE IF EXISTS dim_tipo_solicitacao CASCADE;
 create table dim_tipo_solicitacao (
-   id                serial primary key,
-   tipo_solicitacao  text 
+   id_tipo_solicitacao  serial primary key,
+   tipo_solicitacao     text 
    );
 -- popula:
 insert into dim_tipo_solicitacao(tipo_solicitacao) (select distinct(tipo) from siga_raw order by tipo);
@@ -29,19 +29,30 @@ insert into dim_tipo_solicitacao(tipo_solicitacao) (select distinct(tipo) from s
 --
 DROP TABLE IF EXISTS dim_assunto CASCADE;
 create table dim_assunto (
-   id         serial primary key,
+   id_assunto serial primary key,
    assunto    text 
    );
 -- popula:
 insert into dim_assunto(assunto) (select distinct(assunto) from siga_raw order by assunto);
+
+----------------------------------
+-- dim_subdivisao
+--
+DROP TABLE IF EXISTS dim_subdivisao CASCADE;
+create table dim_subdivisao (
+    id_subdivisao serial primary key,
+    subdivisao    text
+    );
+insert into dim_subdivisao(subdivisao) 
+   (select distinct(subdivisao) from siga_raw order by subdivisao);
 
 -------------------------------------------
 -- dim_orgao_responsavel
 --
 DROP TABLE IF EXISTS dim_orgao_responsavel CASCADE;
 create table dim_orgao_responsavel (
-   id                serial primary key,
-   orgao_responsavel text 
+   id_orgao_responsavel   serial primary key,
+   orgao_responsavel      text 
    );
 -- popula:
 insert into dim_orgao_responsavel(orgao_responsavel) (select distinct(orgao) from siga_raw order by orgao);
@@ -51,22 +62,11 @@ insert into dim_orgao_responsavel(orgao_responsavel) (select distinct(orgao) fro
 --
 DROP TABLE IF EXISTS dim_bairro_assunto CASCADE;
 create table dim_bairro_assunto (
-    id          serial primary key,
-    bairro      text
+    id_bairro_assunto serial primary key,
+    bairro_assunto    text
     );
-insert into dim_bairro_assunto(bairro) 
+insert into dim_bairro_assunto(bairro_assunto) 
    (select distinct(bairro_ass) from siga_raw order by bairro_ass);
-
-----------------------------------
--- dim_subdivisao
---
-DROP TABLE IF EXISTS dim_subdivisao CASCADE;
-create table dim_subdivisao (
-    id          serial primary key,
-    subdivisao  text
-    );
-insert into dim_subdivisao(subdivisao) 
-   (select distinct(subdivisao) from siga_raw order by subdivisao);
 
 ----------------------------------
 -- dim_data
@@ -101,7 +101,7 @@ insert into dim_data (data_d, ano, mes, mes_nome, dia, data_formatada, ano_mes, 
 	   WHEN 3 THEN 'quarta-feira'
 	   WHEN 4 THEN 'quinta-feira-feira'
 	   WHEN 5 THEN 'sexta-feira-feira'
-	   WHEN 6 THEN 'sbado'
+	   WHEN 6 THEN 'sábado'
 	   END AS dia_semana
 FROM (
 	-- Sequencia de dias entre 2010 e 2019 (atenço: 2012 e 2016 so bissextos): 365 * 10 + 2 registros.
