@@ -101,7 +101,7 @@ insert into dim_data (data_d, ano, mes, mes_nome, dia, data_formatada, ano_mes, 
 	   WHEN 3 THEN 'quarta-feira'
 	   WHEN 4 THEN 'quinta-feira-feira'
 	   WHEN 5 THEN 'sexta-feira-feira'
-	   WHEN 6 THEN 'sbado'
+	   WHEN 6 THEN 'sábado'
 	   END AS dia_semana
 FROM (
 	-- Sequencia de dias entre 2010 e 2019 (atenço: 2012 e 2016 so bissextos): 365 * 10 + 2 registros.
