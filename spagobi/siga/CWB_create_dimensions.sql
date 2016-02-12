@@ -1,4 +1,4 @@
--- Copyright 2015 Marcos Santos Abreu
+﻿-- Copyright 2015 Marcos Santos Abreu
 --
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ insert into dim_bairro_assunto(bairro_assunto)
 --
 DROP TABLE IF EXISTS dim_data CASCADE;
 CREATE TABLE dim_data (
-  id             serial primary key,
+  id_data        serial primary key,
   data_d         date,
   ano            double precision,
   mes            double precision,
@@ -118,7 +118,7 @@ ORDER BY 1
 --
 DROP TABLE IF EXISTS dim_hora CASCADE;
 CREATE TABLE dim_hora (
- id             serial primary key,
+ id_hora        serial primary key,
  hora_do_dia    text,
  hora           double precision,
  quarto_de_hora text,

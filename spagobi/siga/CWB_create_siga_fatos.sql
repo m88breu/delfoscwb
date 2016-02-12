@@ -1,4 +1,4 @@
--- Copyright 2015 Marcos Santos Abreu
+﻿-- Copyright 2015 Marcos Santos Abreu
 --
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -18,13 +18,13 @@
 DROP TABLE IF EXISTS siga_fatos CASCADE;
 create table siga_fatos (
     id_siga_fatos        serial primary key,
-    fk_tipo_solicitacao  integer REFERENCES dim_tipo_solicitacao(id),
-    fk_assunto           integer REFERENCES dim_assunto(id),
-    fk_subdivisao        integer REFERENCES dim_subdivisao(id),
-    fk_data              integer REFERENCES dim_data(id),
-    fk_hora              integer REFERENCES dim_hora(id),
-    fk_orgao_responsavel integer REFERENCES dim_orgao_responsavel(id),
-    fk_bairro_assunto    integer REFERENCES dim_bairro_assunto(id),
+    fk_tipo_solicitacao  integer REFERENCES dim_tipo_solicitacao(id_tipo_solicitacao),
+    fk_assunto           integer REFERENCES dim_assunto(id_assunto),
+    fk_subdivisao        integer REFERENCES dim_subdivisao(id_subdivisao),
+    fk_data              integer REFERENCES dim_data(id_data),
+    fk_hora              integer REFERENCES dim_hora(id_hora),
+    fk_orgao_responsavel integer REFERENCES dim_orgao_responsavel(id_orgao_responsavel),
+    fk_bairro_assunto    integer REFERENCES dim_bairro_assunto(id_bairro_assunto),
     solicitacao          text, 
     descricao            text,
     logradouro_assunto   text,
@@ -81,6 +81,6 @@ FROM siga_raw
 	INNER JOIN dim_orgao_responsavel ON dim_orgao_responsavel.orgao_responsavel = siga_raw.orgao
 	INNER JOIN dim_tipo_solicitacao ON dim_tipo_solicitacao.tipo_solicitacao = siga_raw.tipo
 	INNER JOIN dim_subdivisao ON dim_subdivisao.subdivisao = siga_raw.subdivisao
-	INNER JOIN dim_bairro_assunto ON dim_bairro_assunto.bairro = siga_raw.bairro_ass
+	INNER JOIN dim_bairro_assunto ON dim_bairro_assunto.bairro_assunto = siga_raw.bairro_ass
 );
 
